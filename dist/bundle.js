@@ -95,7 +95,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -123,7 +123,9 @@
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 4 */
+/* 4 */,
+/* 5 */,
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -258,4 +260,5 @@ ReactDOM.render(React.createElement(UixButton, null, "Cool UixButton!"), documen
 
 /***/ })
 /******/ ]);
+//# sourceMappingURL=bundle.css.map
 //# sourceMappingURL=bundle.js.map

@@ -9,11 +9,10 @@ const OptimizeCssAssetsPlugin    = require('optimize-css-assets-webpack-plugin')
 const CleanWebpackPlugin         = require('clean-webpack-plugin');
 const glob                       = require('glob');
 const ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin');
-const json                       = JSON.parse(fs.readFileSync('./package.json'));
 const randomString               = require('random-string');
 const IncludeFileWebpackPlugin   = require('include-file-webpack-plugin');
 const moment                     = require('moment');
-
+const json                       = JSON.parse(fs.readFileSync('./package.json'));
 
 
 let globs = {
@@ -24,8 +23,12 @@ let globs = {
 
 
 
+/*! 
+ *************************************
+ * Site Info
+ *************************************
+ */
 
-// Site Info
 let customWebsiteVersion     = json.version,
 	customWebsiteAuthor      = json.author,
 	customWebsiteTitle       = 'Uix Webpack Scaffold',
@@ -47,8 +50,8 @@ let customWebsiteVersion     = json.version,
 	`;
 
 
-
 // Get all the HTML template files
+
 let tempPages = glob.sync( './'+globs.build+'/components/**/*.html' );
 let targetFilesName = [];
 
@@ -62,7 +65,11 @@ tempPages.map( ( event ) => {
 });
 
 
-
+/*! 
+ *************************************
+ *  Main configuration
+ *************************************
+ */
 const webpackConfig = {
 	devtool: process.env.NODE_ENV !== 'production' ? 'source-map' : false,
     mode: 'production',
@@ -73,11 +80,18 @@ const webpackConfig = {
 	entry: {
 		'bundle': './'+globs.build+'/index.js',
 		'bundle.min': './'+globs.build+'/index.js',
+		'bundle-rtl': './'+globs.build+'/index-rtl.js',
+		'bundle-rtl.min': './'+globs.build+'/index-rtl.js',
 	},
     output: {
         path: path.resolve(__dirname, './' + globs.dist ),
         filename: '[name].js'
     },
+//	devServer: {
+//		contentBase: path.join(__dirname, globs.examples ),
+//		compress: true,
+//		port: 8080
+//	},
 	optimization: {
 	    minimizer: [
 
@@ -120,6 +134,7 @@ const webpackConfig = {
                 }
 			},
 			{
+				
 				test: /\.(sa|sc|c)ss$/,
 				include: path.resolve( __dirname, './' + globs.build ),
 				use: [
@@ -198,19 +213,27 @@ const webpackConfig = {
 	
 };
 
-// Remove include files and extra CSS files
+/*! 
+ *************************************
+ *  Remove include files and extra CSS files
+ *************************************
+ */
 webpackConfig.plugins.push(
     new CleanWebpackPlugin([
 		globs.build + '/**/*.css',
-		globs.examples + '/*.html'
+		globs.examples + '/*.html',
+		
 	]),
 	
 	new webpack.BannerPlugin( customWebsiteComment ),
 	
 );
 
-
-// Batch processing HTML template files
+/*! 
+ *************************************
+ *  Batch processing HTML template files
+ *************************************
+ */
 targetFilesName.map( ( event ) => {
 	
 	webpackConfig.plugins.push(
@@ -246,7 +269,17 @@ targetFilesName.map( ( event ) => {
 	);
 });
 
+/*! 
+ *************************************
+ *  Add .min.css files souce map
+ *************************************
+ */
+webpackConfig.plugins.push(
+	new webpack.SourceMapDevToolPlugin({
+	  filename: '[name].css.map',
+	}),
 
+);
 
 
 module.exports = webpackConfig;

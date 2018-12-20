@@ -15,33 +15,16 @@
 /* 
 
 		---------------------------
-		MAIN TEMPLATE STYLES
+		MAIN TEMPLATE STYLES (RTL)
 		---------------------------
 
+		Adding support for language written in a Right To Left (RTL) direction is easy -
+		it's just a matter of overwriting all the horizontal positioning attributes
+		of your CSS stylesheet in a separate stylesheet file named rtl.css.
 */
 body {
-  font: 100% Helvetica, sans-serif;
-  background: #333; }
-
-#root {
-  /* this is a description. */ }
-  #root::after {
-    background: #f00; }
-
-#root {
-  /* this is a description. */ }
-  #root::after {
-    content: '#root after';
-    font-size: 5rem;
-    font-weight: bold; }
-
-#root {
-  /* this is a description. */ }
-  #root::before {
-    content: '#root before';
-    font-size: 5rem;
-    font-weight: bold; }
+  direction: rtl; }
 
 
-/*# sourceMappingURL=bundle.css.map*/
-/*# sourceMappingURL=bundle.css.map*/
+/*# sourceMappingURL=bundle-rtl.css.map*/
+/*# sourceMappingURL=bundle-rtl.css.map*/
