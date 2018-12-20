@@ -36,7 +36,7 @@ let customWebsiteVersion     = json.version,
 	customWebsiteComment     = `
 ## Project Name        :  ` + customWebsiteTitle + `
 ## Project Description :  ` + customWebsiteDesc + `
-## Based on            :  ` + json.description + `
+## Based on            :  ` + customWebsiteGenerator + `
 ## Version             :  ` + customWebsiteVersion + `
 ## Last Update         :  ` + moment().format( "MMMM D, YYYY" ) + `
 ## Powered by          :  ` + customWebsiteAuthor + `
