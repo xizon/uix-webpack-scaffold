@@ -91,15 +91,7 @@ const webpackConfig = {
         path: path.resolve(__dirname, './' + globs.dist ),
         filename: '[name].js'
     },
-	// webpack-dev-server configuration
-	devServer: {
-		compress: true,
-		hot: true,
-		proxy: {
-		    "**": "http://localhost:8080"
-		} 
-	},
-	
+
 	optimization: {
 	    minimizer: [
 
@@ -120,6 +112,7 @@ const webpackConfig = {
 				},
 				canPrint: true
 			}),
+
 		
 		],
 		
@@ -215,7 +208,7 @@ const webpackConfig = {
 
     },
 	plugins: [
-		
+
 	]
 	
 	
@@ -297,7 +290,14 @@ webpackConfig.plugins.push(
  *************************************
  */
 let compiler = webpack( webpackConfig );
-let server = new WebpackDevServer(compiler);
+let server = new WebpackDevServer(compiler, {
+					contentBase: [
+						path.join( __dirname, '' ),
+					],
+	                hot: true,
+					watchContentBase: true,
+	
+				});
 server.listen(8080, "localhost", function() {});
 // server.close();
 
