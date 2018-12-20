@@ -32,7 +32,7 @@ $ npm install --only=dev
 ```
 
 
-**Step 3.** Run the following code to enter development mode. The converted ES5 file **dist/bundle.js** will be created.
+**Step 3.** Run the following code to enter development mode. The converted ES5 files will be created.
 
 ```sh
 $ npm run build
