@@ -28,7 +28,7 @@ $ cd /{your_directory}/uix-webpack-scaffold
 **Step 2.** Before doing all dev stuff make sure you have node installed. After that, run the following code in the main directory to install the node module dependencies.
 
 ```sh
-$ npm install --only=dev
+$ sudo npm install --only=dev
 ```
 
 
@@ -52,6 +52,7 @@ http://localhost:8080/examples/
 ```sh
 $ sudo chown -R $USER:$(id -gn $USER) /Users/{username}/.config
 ```
+
 
 
 
