@@ -29,7 +29,7 @@ let globs = {
 let customWebsiteVersion     = json.version,
 	customWebsiteAuthor      = json.author,
 	customWebsiteTitle       = 'Uix Webpack Scaffold',
-	customWebsiteDesc        = 'Simple demo for scaffold of webpack 4 + react + babel',
+	customWebsiteDesc        = 'Simple demo for scaffold of webpack 4 + react + babel. Supports batch processing of HTML templates, SASS, and JavaScript module files.',
 	customWebsiteCanonical   = '<link rel="canonical" href="https://uiux.cc" />',
 	customWebsiteGenerator   = 'Uix Webpack Scaffold',
 	customWebsiteHash        = randomString({length: 20}),

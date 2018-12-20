@@ -3,7 +3,7 @@
 [![Travis CI](https://api.travis-ci.org/xizon/uix-webpack-scaffold.svg?branch=master)](https://travis-ci.org/xizon/uix-webpack-scaffold/) [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
 
-Simple demo for scaffold of webpack 4 + react + babel.
+Simple demo for scaffold of webpack 4 + react + babel. Supports batch processing of HTML templates, SASS, and JavaScript module files.
 
 By [UIUX Lab](https://uiux.cc)
 
