@@ -1,0 +1,14 @@
+/*!
+ * 
+ * ## Project Name        :  Uix Webpack Scaffold
+ * ## Project Description :  Simple demo for scaffold of webpack 4 + react + babel
+ * ## Based on            :   Simple demo for scaffold of webpack 4 + react + babel  (https://github.com/xizon/uix-webpack-scaffold)
+ * ## Version             :  1.0.0
+ * ## Last Update         :  December 20, 2018
+ * ## Powered by          :  UIUX Lab
+ * ## Created by          :  UIUX Lab (https://uiux.cc)
+ * ## Contact Us          :  uiuxlab@gmail.com
+ * ## Compatible With     :  Bootstrap 4.x, React
+ * ## Released under the MIT license.
+ * 	
+ */body{font:100% Helvetica,sans-serif;background:#333}#root:after{background:red;content:"#root after";font-size:5rem;font-weight:700}#root:before{content:"#root before";font-size:5rem;font-weight:700}

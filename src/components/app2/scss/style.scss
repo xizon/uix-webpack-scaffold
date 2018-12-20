@@ -1,0 +1,9 @@
+#root {
+	
+	/* this is a description. */
+    &::after {
+        content: '#root after';
+        font-size: 5rem;
+        font-weight: bold;
+    }
+}
