@@ -1,9 +1,0 @@
-#root {
-	
-	/* this is a description. */
-    &::before {
-        content: '#root before';
-        font-size: 5rem;
-        font-weight: bold;
-    }
-}
