@@ -6,4 +6,4 @@ node_js:
 
 script: 
  - npm install --dev
- - npm view gulp
+ - npm run build
