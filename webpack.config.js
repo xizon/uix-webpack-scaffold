@@ -12,7 +12,10 @@ const ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin');
 const randomString               = require('random-string');
 const IncludeFileWebpackPlugin   = require('include-file-webpack-plugin');
 const moment                     = require('moment');
+const WebpackDevServer           = require('webpack-dev-server');
 const json                       = JSON.parse(fs.readFileSync('./package.json'));
+
+
 
 
 let globs = {
@@ -73,6 +76,7 @@ tempPages.map( ( event ) => {
 const webpackConfig = {
 	devtool: process.env.NODE_ENV !== 'production' ? 'source-map' : false,
     mode: 'production',
+	watch: true,
 	node: { fs: 'empty' },
     resolve: {
         extensions: ['.js', '.es6', '.vue', '.jsx' ]
@@ -87,11 +91,15 @@ const webpackConfig = {
         path: path.resolve(__dirname, './' + globs.dist ),
         filename: '[name].js'
     },
-//	devServer: {
-//		contentBase: path.join(__dirname, globs.examples ),
-//		compress: true,
-//		port: 8080
-//	},
+	// webpack-dev-server configuration
+	devServer: {
+		compress: true,
+		hot: true,
+		proxy: {
+		    "**": "http://localhost:8080"
+		} 
+	},
+	
 	optimization: {
 	    minimizer: [
 
@@ -280,6 +288,20 @@ webpackConfig.plugins.push(
 	}),
 
 );
+
+
+
+/*! 
+ *************************************
+ *  Listen the server
+ *************************************
+ */
+let compiler = webpack( webpackConfig );
+let server = new WebpackDevServer(compiler);
+server.listen(8080, "localhost", function() {});
+// server.close();
+
+
 
 
 module.exports = webpackConfig;

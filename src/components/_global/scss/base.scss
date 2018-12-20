@@ -7,9 +7,11 @@
 */
 
 $font-stack: Helvetica, sans-serif;
-$primary-color: #333;
+$primary-color: #eee;
 
 body {
     font: 100% $font-stack;
     background: $primary-color;
+	line-height: 1.76666666666;
 }
+

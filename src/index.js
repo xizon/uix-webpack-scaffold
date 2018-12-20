@@ -7,7 +7,6 @@ import './components/app2/scss/style.scss';
 import './components/app3/scss/style.scss';
 
 
-
 //-------------------------------------
 //-------------------------------------
 //import JS files from components

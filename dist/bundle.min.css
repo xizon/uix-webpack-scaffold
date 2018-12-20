@@ -11,4 +11,4 @@
  * ## Compatible With     :  Bootstrap 4.x, React
  * ## Released under the MIT license.
  * 	
- */body{font:100% Helvetica,sans-serif;background:#333}#root:after{background:red;content:"#root after";font-size:5rem;font-weight:700}#root:before{content:"#root before";font-size:5rem;font-weight:700}
+ */body{font:100% Helvetica,sans-serif;background:#eee;line-height:1.76666666666}#root:after{background:red;content:"#root after";font-size:5rem;font-weight:700}#root:before{content:"#root before";font-size:5rem;font-weight:700}

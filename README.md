@@ -38,10 +38,10 @@ $ npm install --only=dev
 $ npm run build
 ```
 
-**Step 4.** Watching files and recompile whenever they change , you can use the following code:
+**Step 4.** When you done, please open the browser and enter the following URL to check out.
 
 ```sh
-$ npm run watch
+http://localhost:8080/examples/
 ```
 
 

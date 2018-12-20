@@ -21,7 +21,8 @@
 */
 body {
   font: 100% Helvetica, sans-serif;
-  background: #333; }
+  background: #eee;
+  line-height: 1.76666666666; }
 
 #root {
   /* this is a description. */ }
