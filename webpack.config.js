@@ -69,6 +69,7 @@ tempPages.map( ( event ) => {
 });
 
 
+
 /*! 
  *************************************
  *  Main configuration
@@ -113,7 +114,6 @@ const webpackConfig = {
 				},
 				canPrint: true
 			}),
-			
 	
 		],
 		
@@ -294,66 +294,74 @@ webpackConfig.plugins.push(
 const compiler = webpack( webpackConfig );
 const app = express();
 const instance = webpackDevMiddleware( compiler );
-
 app.use( instance );
 
 
-setInterval( () => {
+//Watch for Files Changes in Node.js
+require('log-timestamp');
 
-	// After a short delay the configuration is changed and a banner plugin is added
-	// to the config
-	compiler.apply(
+targetFilesName.map( ( event ) => {
+	
+	let htmlTempFiles = `${event[0]}`;
 
-		new CleanWebpackPlugin([
-			globs.build + '/**/*.css'
-		])
-
-	);
-
-
-	targetFilesName.map( ( event ) => {
-
+	fs.watchFile( htmlTempFiles, (curr, prev) => {
+	    console.log(`${htmlTempFiles} file Changed`);
+		
+		// After a short delay the configuration is changed and a banner plugin is added
+		// to the config
 		compiler.apply(
 
-			new IncludeFileWebpackPlugin({
-				directory: '',
-				input: `${event[0]}`,
-				output: `./${globs.examples}/${event[1]}`,
-				processIncludeContents: function(html) {
-					return html;
-				}
-			}),
-
-			new ReplaceInFileWebpackPlugin([
-				{
-					dir: globs.examples,
-					files: [ event[1], event[1] ],
-					rules: [
-						{ search: '@@{website_title}', replace: customWebsiteTitle },
-						{ search: '@@{website_desc}', replace: customWebsiteDesc },
-						{ search: '@@{website_canonical}', replace: customWebsiteCanonical },
-						{ search: '@@{website_author}', replace: customWebsiteAuthor },
-						{ search: '@@{website_generator}', replace: customWebsiteGenerator },
-						{ search: '@@{website_version}', replace: customWebsiteVersion },
-						{ search: '@@{website_comment}', replace: customWebsiteComment },
-						{ search: '@@{website_hash}', replace: customWebsiteHash },
-
-					]
-				}
+			new CleanWebpackPlugin([
+				globs.build + '/**/*.css'
 			])
-
-
 
 		);
 
 
+		targetFilesName.map( ( event ) => {
 
+			compiler.apply(
+
+				new IncludeFileWebpackPlugin({
+					directory: '',
+					input: `${event[0]}`,
+					output: `./${globs.examples}/${event[1]}`,
+					processIncludeContents: function(html) {
+						return html;
+					}
+				}),
+
+				new ReplaceInFileWebpackPlugin([
+					{
+						dir: globs.examples,
+						files: [ event[1], event[1] ],
+						rules: [
+							{ search: '@@{website_title}', replace: customWebsiteTitle },
+							{ search: '@@{website_desc}', replace: customWebsiteDesc },
+							{ search: '@@{website_canonical}', replace: customWebsiteCanonical },
+							{ search: '@@{website_author}', replace: customWebsiteAuthor },
+							{ search: '@@{website_generator}', replace: customWebsiteGenerator },
+							{ search: '@@{website_version}', replace: customWebsiteVersion },
+							{ search: '@@{website_comment}', replace: customWebsiteComment },
+							{ search: '@@{website_hash}', replace: customWebsiteHash },
+
+						]
+					}
+				])
+
+
+
+			);
+
+
+
+		});
+
+		// Recompile the bundle with the banner plugin:
+		instance.invalidate();	
 	});
-
-	// Recompile the bundle with the banner plugin:
-	instance.invalidate();	
 	
-}, 5000);
+});
 
 
 
