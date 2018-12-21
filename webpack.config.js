@@ -17,6 +17,7 @@ const WebpackDevServer           = require('webpack-dev-server');
 const json                       = JSON.parse(fs.readFileSync('./package.json'));
 const webpackDevMiddleware       = require('webpack-dev-middleware');
 
+
 let globs = {
 	port         : 8080,
 	examples     : 'examples',
@@ -112,7 +113,7 @@ const webpackConfig = {
 				},
 				canPrint: true
 			}),
-
+			
 	
 		],
 		
@@ -284,6 +285,7 @@ webpackConfig.plugins.push(
 
 
 
+
 /*! 
  *************************************
  *  Hook our plugins to fix webpack dev server is not serving the latest compiled code
@@ -351,7 +353,8 @@ setInterval( () => {
 	// Recompile the bundle with the banner plugin:
 	instance.invalidate();	
 	
-}, 3000);
+}, 5000);
+
 
 
 
@@ -370,7 +373,13 @@ const server = new WebpackDevServer( compiler, {
 	
 				});
 
-server.listen( globs.port, "localhost", function() { });
+server.listen( globs.port, "localhost", function (err, result) {
+  if (err) {
+    return console.log(err);
+  }
+
+  console.log('Listening at http://localhost:8080/');
+})
 
 
 

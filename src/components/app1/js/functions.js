@@ -6,5 +6,3 @@ const echo = value => console.log('%c ./src/components/app1 =>  echo(sex) =>' + 
 export { sex, echo };
 
 console.log('%c ./src/components/app1 =>  ' + '%c' + globalVar, 'color: #333', 'color: #f00');
-
-
