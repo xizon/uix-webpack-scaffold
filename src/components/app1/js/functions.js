@@ -1,3 +1,9 @@
+/* 
+ *************************************
+ * <!-- APP1 -->
+ *************************************
+ */
+
 import { globalVar, globalVar2 } from '../../_global/js/vars.js';
 
 const sex = 'boy';

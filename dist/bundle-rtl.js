@@ -95,26 +95,38 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 4:
+/***/ 6:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_global_scss_rtl_base_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
-/* harmony import */ var _components_global_scss_rtl_base_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_components_global_scss_rtl_base_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_global_scss_rtl_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7);
+/* harmony import */ var _components_global_scss_rtl_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_components_global_scss_rtl_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_global_scss_rtl_base_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
+/* harmony import */ var _components_global_scss_rtl_base_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_components_global_scss_rtl_base_scss__WEBPACK_IMPORTED_MODULE_1__);
 //-------------------------------------
 //-------------------------------------
 //import RTL SASS files from components
 
+/* must be placed in the first place */
+
+
 
 /***/ }),
 
-/***/ 5:
+/***/ 7:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 8:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin

@@ -12,16 +12,26 @@
  * ## Released under the MIT license.
  * 	
  */
-/* 
+/**
 
-		---------------------------
-		MAIN TEMPLATE STYLES (RTL)
-		---------------------------
+	TABLE OF CONTENTS  (RTL)
+	---------------------------
+	
 
-		Adding support for language written in a Right To Left (RTL) direction is easy -
-		it's just a matter of overwriting all the horizontal positioning attributes
-		of your CSS stylesheet in a separate stylesheet file named rtl.css.
+	Adding support for language written in a Right To Left (RTL) direction is easy -
+	it's just a matter of overwriting all the horizontal positioning attributes
+	of your CSS stylesheet in a separate stylesheet file named -rtl.css.
+
+
+	${{TOC}}
+
 */
+
+/* 
+ *************************************
+ * <!-- Base -->
+ *************************************
+ */
 body {
   direction: rtl; }
 

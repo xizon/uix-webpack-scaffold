@@ -1,6 +1,7 @@
 //-------------------------------------
 //-------------------------------------
 //import SASS files from components
+import './components/_global/scss/__.scss'; /* must be placed in the first place */
 import './components/_global/scss/base.scss';
 import './components/app1/scss/style.scss';
 import './components/app2/scss/style.scss';
@@ -10,9 +11,12 @@ import './components/app3/scss/style.scss';
 //-------------------------------------
 //-------------------------------------
 //import JS files from components
+import './components/_global/js/__.js'; /* must be placed in the first place */
 import { sex, echo } from './components/app1/js/functions.js';
 import './components/app2/js/functions.js';
 import './components/app3/js/functions.js';
+
+
 
 echo(sex);
 

@@ -95,7 +95,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -123,31 +123,68 @@
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 4 */,
-/* 5 */,
-/* 6 */
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+/**
+
+	TABLE OF CONTENTS
+	---------------------------
+	
+	
+	${{TOC}}
+
+*/
+
+/***/ }),
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 
+// EXTERNAL MODULE: ./src/components/_global/scss/__.scss
+var _ = __webpack_require__(0);
+
 // EXTERNAL MODULE: ./src/components/_global/scss/base.scss
-var base = __webpack_require__(0);
+var base = __webpack_require__(1);
 
 // EXTERNAL MODULE: ./src/components/app1/scss/style.scss
-var style = __webpack_require__(1);
+var style = __webpack_require__(2);
 
 // EXTERNAL MODULE: ./src/components/app2/scss/style.scss
-var scss_style = __webpack_require__(2);
+var scss_style = __webpack_require__(3);
 
 // EXTERNAL MODULE: ./src/components/app3/scss/style.scss
-var app3_scss_style = __webpack_require__(3);
+var app3_scss_style = __webpack_require__(4);
+
+// EXTERNAL MODULE: ./src/components/_global/js/__.js
+var js_ = __webpack_require__(5);
 
 // CONCATENATED MODULE: ./src/components/_global/js/vars.js
+/* 
+ *************************************
+ * <!-- Vars -->
+ *************************************
+ */
 var globalVar = 'global var';
 var globalVar2 = 'global var2';
 
 // CONCATENATED MODULE: ./src/components/app1/js/functions.js
+/* 
+ *************************************
+ * <!-- APP1 -->
+ *************************************
+ */
 
 var sex = 'boy';
 
@@ -158,12 +195,22 @@ var echo = function echo(value) {
 
 console.log('%c ./src/components/app1 =>  ' + '%c' + globalVar, 'color: #333', 'color: #f00');
 // CONCATENATED MODULE: ./src/components/app2/js/functions.js
+/* 
+ *************************************
+ * <!-- APP2 -->
+ *************************************
+ */
 
 [1, 2, 3].map(function (n) {
   return Math.pow(n, 2);
 });
 console.log('%c ./src/components/app2 =>  ' + '%c' + globalVar, 'color: #333', 'color: #f00');
 // CONCATENATED MODULE: ./src/components/app3/js/functions.js
+/* 
+ *************************************
+ * <!-- APP3 -->
+ *************************************
+ */
 
 console.log('%c ./src/components/app3 =>  ' + '%c' + globalVar, 'color: #333', 'color: #f00');
 // CONCATENATED MODULE: ./src/index.js
@@ -189,11 +236,17 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 //-------------------------------------
 //import SASS files from components
 
+/* must be placed in the first place */
+
+
 
 
  //-------------------------------------
 //-------------------------------------
 //import JS files from components
+
+
+/* must be placed in the first place */
 
 
 

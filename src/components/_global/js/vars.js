@@ -1,3 +1,9 @@
+/* 
+ *************************************
+ * <!-- Vars -->
+ *************************************
+ */
+
 const globalVar = 'global var';
 const globalVar2 = 'global var2';
 

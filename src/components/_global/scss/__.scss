@@ -1,0 +1,49 @@
+/**
+
+	TABLE OF CONTENTS
+	---------------------------
+	
+	
+	${{TOC}}
+
+*/
+
+
+
+// FONTS
+// ---------------------------
+//
+//Default font-size for HTML
+$basic-font-size       : 16px;
+$font-stack            : 'Helvetica Neue', Helvetica, 'Microsoft YaHei', STXihei, 'PingFang SC','Hiragino Sans GB', Arial, sans-serif;
+$font-mobile-stack     : "lucida grande", tahoma, verdana, arial, sans-serif;
+$font-size-body        : 1rem;
+$font-size-blockquote  : 1rem;
+$font-size-form        : 0.875rem;
+$font-size-h1          : 3.5rem;
+$font-size-h2          : 2.5rem;
+$font-size-h3          : 1.75rem;
+$font-size-h4          : 1.25rem;
+$font-size-h5          : 1rem;
+$font-size-h6          : 0.75rem;	
+
+
+
+// Easing Transition
+// ---------------------------
+//
+@mixin transition-cubic-bezier() {
+	// @include transition-cubic-bezier();
+	transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+}
+
+
+
+// Default Transition
+// ---------------------------
+//
+@mixin transition-default() {
+	// @include transition-default(); 
+	transition: all 0.3s ease;
+}
+

@@ -12,18 +12,31 @@
  * ## Released under the MIT license.
  * 	
  */
-/* 
+/**
 
-		---------------------------
-		MAIN TEMPLATE STYLES
-		---------------------------
+	TABLE OF CONTENTS
+	---------------------------
+	
+	
+	${{TOC}}
 
 */
+
+/* 
+ *************************************
+ * <!-- Base -->
+ *************************************
+ */
 body {
   font: 100% Helvetica, sans-serif;
   background: #eee;
   line-height: 1.7666666; }
 
+/* 
+ *************************************
+ * <!-- APP1 -->
+ *************************************
+ */
 #root {
   /* this is a description. */ }
   #root::before {
@@ -35,11 +48,21 @@ body {
     font-size: 1.2rem;
     display: block; }
 
+/* 
+ *************************************
+ * <!-- APP2 -->
+ *************************************
+ */
 #root {
   /* this is a description. */ }
   #root::after {
     content: '#root::after'; }
 
+/* 
+ *************************************
+ * <!-- APP3 -->
+ *************************************
+ */
 #root {
   /* this is a description. */ }
   #root::before {
