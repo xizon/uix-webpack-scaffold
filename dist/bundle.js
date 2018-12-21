@@ -3,7 +3,7 @@
  * ## Project Name        :  Uix Webpack Scaffold
  * ## Project Description :  Simple demo for scaffold of webpack 4 + react + babel. Supports batch processing of HTML templates, SASS, and JavaScript module files.
  * ## Based on            :  Uix Webpack Scaffold
- * ## Version             :  1.0.0
+ * ## Version             :  1.0.1
  * ## Last Update         :  December 21, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
@@ -149,25 +149,23 @@ var globalVar2 = 'global var2';
 
 // CONCATENATED MODULE: ./src/components/app1/js/functions.js
 
-var sex = 'hey boy';
+var sex = 'boy';
 
 var echo = function echo(value) {
-  return alert(value);
+  return console.log('%c ./src/components/app1 =>  echo(sex) =>' + '%c ' + value, 'color: #333', 'color: #f00');
 };
 
 
-console.log('app1' + globalVar);
+console.log('%c ./src/components/app1 =>  ' + '%c' + globalVar, 'color: #333', 'color: #f00');
 // CONCATENATED MODULE: ./src/components/app2/js/functions.js
 
 [1, 2, 3].map(function (n) {
   return Math.pow(n, 2);
 });
-alert(222);
-console.log('app2' + globalVar);
+console.log('%c ./src/components/app2 =>  ' + '%c' + globalVar, 'color: #333', 'color: #f00');
 // CONCATENATED MODULE: ./src/components/app3/js/functions.js
 
-alert(333);
-console.log('app3' + globalVar);
+console.log('%c ./src/components/app3 =>  ' + '%c' + globalVar, 'color: #333', 'color: #f00');
 // CONCATENATED MODULE: ./src/index.js
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 

@@ -1,7 +1,7 @@
 {
   "author": "UIUX Lab",
   "name": "uix-webpack-scaffold",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple demo for scaffold of webpack 4 + react + babel. Supports batch processing of HTML templates, SASS, and JavaScript module files.  (https://github.com/xizon/uix-webpack-scaffold)",
   "main": "webpack.config.js",
   "directories": {
@@ -46,6 +46,7 @@
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.27.0",
     "webpack-cli": "^3.1.2",
+    "webpack-dev-middleware": "^3.4.0",
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {

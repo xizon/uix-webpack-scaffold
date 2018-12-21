@@ -1,6 +1,7 @@
 'use strict';
 
 const webpack                    = require('webpack');
+const express                    = require('express');
 const fs                         = require('fs');
 const path                       = require('path');
 const UglifyJsPlugin             = require('uglifyjs-webpack-plugin');
@@ -14,11 +15,10 @@ const IncludeFileWebpackPlugin   = require('include-file-webpack-plugin');
 const moment                     = require('moment');
 const WebpackDevServer           = require('webpack-dev-server');
 const json                       = JSON.parse(fs.readFileSync('./package.json'));
-
-
-
+const webpackDevMiddleware       = require('webpack-dev-middleware');
 
 let globs = {
+	port         : 8080,
 	examples     : 'examples',
 	build        : 'src',
 	dist         : 'dist'
@@ -89,7 +89,7 @@ const webpackConfig = {
 	},
     output: {
         path: path.resolve(__dirname, './' + globs.dist ),
-        filename: '[name].js'
+        filename: '[name].js',
     },
 
 	optimization: {
@@ -113,7 +113,7 @@ const webpackConfig = {
 				canPrint: true
 			}),
 
-		
+	
 		],
 		
 	},
@@ -208,7 +208,7 @@ const webpackConfig = {
 
     },
 	plugins: [
-
+		
 	]
 	
 	
@@ -286,23 +286,99 @@ webpackConfig.plugins.push(
 
 /*! 
  *************************************
+ *  Hook our plugins to fix webpack dev server is not serving the latest compiled code
+ *************************************
+ */
+const compiler = webpack( webpackConfig );
+const app = express();
+const instance = webpackDevMiddleware( compiler );
+
+app.use( instance );
+
+
+setInterval( () => {
+
+	// After a short delay the configuration is changed and a banner plugin is added
+	// to the config
+	compiler.apply(
+
+		new CleanWebpackPlugin([
+			globs.build + '/**/*.css'
+		])
+
+	);
+
+
+	targetFilesName.map( ( event ) => {
+
+		compiler.apply(
+
+			new IncludeFileWebpackPlugin({
+				directory: '',
+				input: `${event[0]}`,
+				output: `./${globs.examples}/${event[1]}`,
+				processIncludeContents: function(html) {
+					return html;
+				}
+			}),
+
+			new ReplaceInFileWebpackPlugin([
+				{
+					dir: globs.examples,
+					files: [ event[1], event[1] ],
+					rules: [
+						{ search: '@@{website_title}', replace: customWebsiteTitle },
+						{ search: '@@{website_desc}', replace: customWebsiteDesc },
+						{ search: '@@{website_canonical}', replace: customWebsiteCanonical },
+						{ search: '@@{website_author}', replace: customWebsiteAuthor },
+						{ search: '@@{website_generator}', replace: customWebsiteGenerator },
+						{ search: '@@{website_version}', replace: customWebsiteVersion },
+						{ search: '@@{website_comment}', replace: customWebsiteComment },
+						{ search: '@@{website_hash}', replace: customWebsiteHash },
+
+					]
+				}
+			])
+
+
+
+		);
+
+
+
+	});
+
+	// Recompile the bundle with the banner plugin:
+	instance.invalidate();	
+	
+}, 3000);
+
+
+
+/*! 
+ *************************************
  *  Listen the server
  *************************************
  */
-let compiler = webpack( webpackConfig );
-let server = new WebpackDevServer(compiler, {
+
+const server = new WebpackDevServer( compiler, {
 					contentBase: [
-						path.join( __dirname, '' ),
+						path.resolve(__dirname, './' )
 					],
 	                hot: true,
 					watchContentBase: true,
 	
 				});
-server.listen(8080, "localhost", function() {});
-// server.close();
+
+server.listen( globs.port, "localhost", function() { });
 
 
 
-
+/*! 
+ *************************************
+ *  Exporting webpack module
+ *************************************
+ */
 module.exports = webpackConfig;
+
 

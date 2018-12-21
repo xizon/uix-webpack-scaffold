@@ -1,8 +1,10 @@
 import { globalVar, globalVar2 } from '../../_global/js/vars.js';
 
-const sex = 'hey boy';
-const echo = value => alert(value);
+const sex = 'boy';
+const echo = value => console.log('%c ./src/components/app1 =>  echo(sex) =>' + '%c ' + value, 'color: #333', 'color: #f00');
 
 export { sex, echo };
 
-console.log('app1' + globalVar);
+console.log('%c ./src/components/app1 =>  ' + '%c' + globalVar, 'color: #333', 'color: #f00');
+
+
