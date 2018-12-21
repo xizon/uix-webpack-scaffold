@@ -18,7 +18,9 @@
     "url": "uix-webpack-scaffold"
   },
   "keywords": [
-    "uix"
+    "uix",
+    "scaffold",
+    "webpack"
   ],
   "license": "MIT",
   "bugs": {
@@ -38,6 +40,7 @@
     "include-file-webpack-plugin": "^1.0.3",
     "json-loader": "^0.5.7",
     "moment": "^2.23.0",
+    "node-sass": "^4.11.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "prettier": "^1.15.3",
     "prettier-loader": "^2.1.1",
@@ -52,7 +55,6 @@
   "dependencies": {
     "css-loader": "^2.0.1",
     "mini-css-extract-plugin": "^0.5.0",
-    "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1"
   },

@@ -27,10 +27,10 @@ $ cd /{your_directory}/uix-webpack-scaffold
 ```
 
 
-**Step 2.** Before doing all dev stuff make sure you have node installed. After that, run the following code in the main directory to install the node module dependencies.
+**Step 2.** Before doing all dev stuff make sure you have `Node 10+` installed. After that, run the following code in the main directory to install the node module dependencies.
 
 ```sh
-$ sudo npm install --only=dev
+$ sudo npm install --save-dev  --unsafe-perm node-sass
 ```
 
 
