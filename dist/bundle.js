@@ -3,8 +3,8 @@
  * ## Project Name        :  Uix Webpack Scaffold
  * ## Project Description :  Simple demo for scaffold of webpack 4 + react + babel. Supports batch processing of HTML templates, SASS, and JavaScript module files.
  * ## Based on            :  Uix Webpack Scaffold
- * ## Version             :  1.0.1
- * ## Last Update         :  December 21, 2018
+ * ## Version             :  1.0.2
+ * ## Last Update         :  December 23, 2018
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -138,7 +138,11 @@
 	---------------------------
 	
 	
-	${{TOC}}
+	1.Vars
+    2.APP1
+    3.APP2
+    4.APP3
+
 
 */
 
@@ -176,8 +180,9 @@ var js_ = __webpack_require__(5);
  * <!-- Vars -->
  *************************************
  */
-var globalVar = 'global var';
-var globalVar2 = 'global var2';
+var globalVar = 'global var 1';
+var globalVar2 = 'global var 2';
+var globalVar3 = 'global var 3';
 
 // CONCATENATED MODULE: ./src/components/app1/js/functions.js
 /* 
@@ -204,7 +209,7 @@ console.log('%c ./src/components/app1 =>  ' + '%c' + globalVar, 'color: #333', '
 [1, 2, 3].map(function (n) {
   return Math.pow(n, 2);
 });
-console.log('%c ./src/components/app2 =>  ' + '%c' + globalVar, 'color: #333', 'color: #f00');
+console.log('%c ./src/components/app2 =>  ' + '%c' + globalVar2, 'color: #333', 'color: #f00');
 // CONCATENATED MODULE: ./src/components/app3/js/functions.js
 /* 
  *************************************
@@ -212,7 +217,7 @@ console.log('%c ./src/components/app2 =>  ' + '%c' + globalVar, 'color: #333', '
  *************************************
  */
 
-console.log('%c ./src/components/app3 =>  ' + '%c' + globalVar, 'color: #333', 'color: #f00');
+console.log('%c ./src/components/app3 =>  ' + '%c' + globalVar3, 'color: #333', 'color: #f00');
 // CONCATENATED MODULE: ./src/index.js
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 

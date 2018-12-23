@@ -382,16 +382,80 @@ const server = new WebpackDevServer( compiler, {
 				});
 
 server.listen( globs.port, "localhost", function (err, result) {
-  if (err) {
-    return console.log(err);
-  }
+	if (err) {
+	    return console.log(err);
+	}
 
-  console.log('Listening at http://localhost:8080/');
+
+	console.log('Listening at http://localhost:8080/');
 })
 
 
+/*! 
+ *************************************
+ *  Build a table of contents (TOC)
+ *************************************
+ */
+compiler.plugin( 'done', () => { 
+	
+	setTimeout ( () => {
+		['./'+globs.dist+'/bundle.css', './'+globs.dist+'/bundle.js'].map( ( filepath ) => {
+
+			if ( fs.existsSync( filepath ) ) {
+
+				fs.readFile( filepath, function( err, content ) {
+
+					if ( err ) throw err;
+
+					let curCon  = content.toString(),
+						newtext = curCon.match(/<\!\-\-.*?(?:>|\-\-\/>)/gi );
 
 
+					//is the matched group if found
+					if ( newtext && newtext.length > 1 ) {  
+
+						let curToc = '';
+
+						for ( var p = 0; p < newtext.length; p++ ) {
+
+							let curIndex = p + 1,
+								newStr   = newtext[ p ].replace( '<!--', '' ).replace( '-->', '' ).replace(/^\s+|\s+$/g, '' );
+
+							if ( p > 0 ) {
+								curToc += '    ' + curIndex + '.' + newStr + '\n';
+							} else {
+								curToc +=  curIndex + '.' + newStr + '\n';
+							}
+
+						}
+
+						//Replace a string in a file with nodejs
+						var result = curCon.replace(/\$\{\{TOC\}\}/g, curToc );
+
+						fs.writeFile( filepath, result, 'utf8', function (err) {
+							console.log( filepath + ' \'s table of contents generated successfully!' );
+							if (err) return console.log(err);
+						});
+
+
+					}
+
+
+				});			
+
+
+			}
+
+
+		});	
+	}, 1000 );
+
+	
+	
+
+});
+									
+									
 /*! 
  *************************************
  *  Exporting webpack module
