@@ -51,7 +51,7 @@
     "webpack": "^4.27.0",
     "webpack-cli": "^3.1.2",
     "webpack-dev-middleware": "^3.4.0",
-    "webpack-dev-server": "^3.1.10"
+    "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
     "css-loader": "^2.0.1",
