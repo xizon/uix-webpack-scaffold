@@ -1,7 +1,7 @@
 # Uix Webpack Scaffold
 
 [![Travis CI](https://api.travis-ci.org/xizon/uix-webpack-scaffold.svg?branch=master)](https://travis-ci.org/xizon/uix-webpack-scaffold/) 
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=1.0.2&x2=0)](https://www.npmjs.com/package/uix-webpack-scaffold)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=1.0.3&x2=0)](https://www.npmjs.com/package/uix-webpack-scaffold)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
 
@@ -13,6 +13,9 @@ By [UIUX Lab](https://uiux.cc)
 
 
 ## Installation And Test
+
+You will need to have [node](https://nodejs.org/) setup on your machine. That will output the built distributables to `./dist/*` and `./examples/*.html`.
+
 
 **Step 1.** Clone the repo to get all source files including build scripts: 
 
@@ -30,7 +33,7 @@ $ cd /{your_directory}/uix-webpack-scaffold
 **Step 2.** Before doing all dev stuff make sure you have `Node 10+` installed. After that, run the following code in the main directory to install the node module dependencies.
 
 ```sh
-$ sudo npm install --save-dev  --unsafe-perm node-sass
+$ sudo npm install --only=dev --unsafe-perm --production
 ```
 
 

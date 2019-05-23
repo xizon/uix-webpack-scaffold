@@ -9,14 +9,43 @@ const MiniCssExtractPlugin       = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin    = require('optimize-css-assets-webpack-plugin');
 const CleanWebpackPlugin         = require('clean-webpack-plugin');
 const glob                       = require('glob');
-const ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin');
 const randomString               = require('random-string');
 const IncludeFileWebpackPlugin   = require('include-file-webpack-plugin');
 const moment                     = require('moment');
 const WebpackDevServer           = require('webpack-dev-server');
 const json                       = JSON.parse(fs.readFileSync('./package.json'));
 const webpackDevMiddleware       = require('webpack-dev-middleware');
-
+const colors = {
+    Reset: "\x1b[0m",
+    Bright: "\x1b[1m",
+    Dim: "\x1b[2m",
+    Underscore: "\x1b[4m",
+    Blink: "\x1b[5m",
+    Reverse: "\x1b[7m",
+    Hidden: "\x1b[8m",
+    fg: {
+        Black: "\x1b[30m",
+        Red: "\x1b[31m",
+        Green: "\x1b[32m",
+        Yellow: "\x1b[33m",
+        Blue: "\x1b[34m",
+        Magenta: "\x1b[35m",
+        Cyan: "\x1b[36m",
+        White: "\x1b[37m",
+        Crimson: "\x1b[38m" //القرمزي
+    },
+    bg: {
+        Black: "\x1b[40m",
+        Red: "\x1b[41m",
+        Green: "\x1b[42m",
+        Yellow: "\x1b[43m",
+        Blue: "\x1b[44m",
+        Magenta: "\x1b[45m",
+        Cyan: "\x1b[46m",
+        White: "\x1b[47m",
+        Crimson: "\x1b[48m"
+    }
+};
 
 let globs = {
 	port         : 8080,
@@ -34,7 +63,7 @@ let globs = {
  */
 
 let customWebsiteVersion     = json.version,
-	customWebsiteAuthor      = json.author,
+	customWebsiteAuthor      = ( Object.prototype.toString.call( json.author ) == '[object Object]' ) ? json.author.name : json.author,
 	customWebsiteTitle       = 'Uix Webpack Scaffold',
 	customWebsiteDesc        = 'Simple demo for scaffold of webpack 4 + react + babel. Supports batch processing of HTML templates, SASS, and JavaScript module files.',
 	customWebsiteCanonical   = '<link rel="canonical" href="https://uiux.cc" />',
@@ -55,18 +84,71 @@ let customWebsiteVersion     = json.version,
 
 
 // Get all the HTML template files
+let tempAllPages = glob.sync( './'+globs.build+'/components/**/*.html' );
+let targetTempFilesName = [];
+let targetAllTempFilesName = [];
 
-let tempPages = glob.sync( './'+globs.build+'/components/**/*.html' );
-let targetFilesName = [];
-
-tempPages.map( ( event ) => {
+tempAllPages.map( ( event ) => {
 	let filename = event.split( '/' ).pop();
 	
+	targetAllTempFilesName.push( [ event, event.split( '/' ).pop() ] );
+	
 	if ( filename.indexOf( 'include-' ) < 0 ) {
-		targetFilesName.push( [ event, event.split( '/' ).pop() ] );
+		targetTempFilesName.push( [ event, event.split( '/' ).pop() ] );
 	}
 	
 });
+
+
+
+let targetFilesNameArrays = [
+  targetAllTempFilesName
+];
+let targetAllWatchFilesName = [].concat(...targetFilesNameArrays);
+
+
+// String replacement for page templates
+class ReplacePlaceholderForFile {
+	constructor( options ) {
+		this.options = options;
+	}
+	apply( compiler ) {
+		compiler.hooks.done.tap('ReplacePlaceholderForFile', ( stats ) => {
+			
+			const filepath = this.options.filepath;
+			
+			fs.readFile( filepath, 'utf8', function(err, data ){
+
+				if ( err ) {
+					console.log(colors.fg.Red, err, colors.Reset);
+				} else {
+
+					data = data.replace(/\@\@\{website_title\}/g, customWebsiteTitle )
+								.replace(/\@\@\{website_desc\}/g, customWebsiteDesc )
+								.replace(/\@\@\{website_canonical\}/g, customWebsiteCanonical )
+								.replace(/\@\@\{website_author\}/g, customWebsiteAuthor )
+								.replace(/\@\@\{website_generator\}/g, customWebsiteGenerator )
+								.replace(/\@\@\{website_version\}/g, customWebsiteVersion )
+								.replace(/\@\@\{website_comment\}/g, customWebsiteComment )
+								.replace(/\@\@\{website_hash\}/g, customWebsiteHash );
+
+					fs.writeFile( filepath, data, (err) => {
+						if ( err ) {
+							console.log(colors.fg.Red, err, colors.Reset);
+							return;
+						}
+						//file written successfully
+						console.log(colors.fg.Green, `${filepath} written successfully!`, colors.Reset);
+
+					});
+				}
+
+
+			});
+
+		});
+	}
+}
 
 
 
@@ -83,6 +165,12 @@ const webpackConfig = {
     resolve: {
         extensions: ['.js', '.es6', '.vue', '.jsx' ]
     },
+	
+	//Exclude react from bundle
+//    externals: {
+//      'react': 'React',
+//		'react-dom': 'ReactDOM'
+//    },
 	entry: {
 		'bundle': './'+globs.build+'/index.js',
 		'bundle.min': './'+globs.build+'/index.js',
@@ -90,7 +178,7 @@ const webpackConfig = {
 		'bundle-rtl.min': './'+globs.build+'/index-rtl.js',
 	},
     output: {
-        path: path.resolve(__dirname, './' + globs.dist ),
+        path: path.resolve(__dirname, './' + globs.dist + '/js' ),
         filename: '[name].js',
     },
 
@@ -104,8 +192,7 @@ const webpackConfig = {
 			new MiniCssExtractPlugin({
 				// Options similar to the same options in webpackOptions.output
 				// both options are optional
-				filename: "[name].css",
-				chunkFilename: "[id].css"
+				filename: '../css/[name].css'
 			}),
 			new OptimizeCssAssetsPlugin({
 				assetNameRegExp: /\.min\.css$/g,
@@ -215,29 +302,25 @@ const webpackConfig = {
 	
 };
 
-/*! 
- *************************************
- *  Remove include files and extra CSS files
- *************************************
- */
+// Remove include files and extra CSS files
 webpackConfig.plugins.push(
     new CleanWebpackPlugin([
 		globs.build + '/**/*.css',
 		globs.examples + '/*.html',
 		
-	]),
-	
-	new webpack.BannerPlugin( customWebsiteComment ),
-	
+	])
 );
 
-/*! 
- *************************************
- *  Batch processing HTML template files
- *************************************
- */
-targetFilesName.map( ( event ) => {
-	
+// Adds a banner to the top of each generated chunk.
+webpackConfig.plugins.push(
+    new webpack.BannerPlugin( customWebsiteComment )
+);
+
+
+
+// Batch processing HTML template files
+targetTempFilesName.map( ( event ) => {
+
 	webpackConfig.plugins.push(
 		
 		new IncludeFileWebpackPlugin({
@@ -247,40 +330,30 @@ targetFilesName.map( ( event ) => {
 			processIncludeContents: function(html) {
 				return html;
 			}
-		}),	
-		
-		new ReplaceInFileWebpackPlugin([
-			{
-				dir: globs.examples,
-				files: [ event[1], event[1] ],
-				rules: [
-					{ search: '@@{website_title}', replace: customWebsiteTitle },
-					{ search: '@@{website_desc}', replace: customWebsiteDesc },
-					{ search: '@@{website_canonical}', replace: customWebsiteCanonical },
-					{ search: '@@{website_author}', replace: customWebsiteAuthor },
-					{ search: '@@{website_generator}', replace: customWebsiteGenerator },
-					{ search: '@@{website_version}', replace: customWebsiteVersion },
-					{ search: '@@{website_comment}', replace: customWebsiteComment },
-					{ search: '@@{website_hash}', replace: customWebsiteHash },
-
-				]
-			}
-		]),	
-		
+		})
 		
 	);
 });
 
-/*! 
- *************************************
- *  Add .min.css files souce map
- *************************************
- */
+
+
+// String replacement for page templates
+targetTempFilesName.map( ( event ) => {
+	
+	webpackConfig.plugins.push(
+		new ReplacePlaceholderForFile({
+			filepath: `./${globs.examples}/${event[1]}`
+		})
+	);
+
+});
+
+
+// Add .min.css files souce map
 webpackConfig.plugins.push(
 	new webpack.SourceMapDevToolPlugin({
-	  filename: '[name].css.map',
-	}),
-
+	  filename: '../css/[name].css.map',
+	})
 );
 
 
@@ -300,12 +373,13 @@ app.use( instance );
 //Watch for Files Changes in Node.js
 require('log-timestamp');
 
-targetFilesName.map( ( event ) => {
+targetAllWatchFilesName.map( ( event ) => {
 	
-	let htmlTempFiles = `${event[0]}`;
+	let curFile = `${event[0]}`;
 
-	fs.watchFile( htmlTempFiles, (curr, prev) => {
-	    console.log(`${htmlTempFiles} file Changed`);
+	fs.watchFile( curFile, (curr, prev) => {
+	    
+		console.log(colors.fg.Yellow, `${curFile} file Changed`, colors.Reset);
 		
 		// After a short delay the configuration is changed and a banner plugin is added
 		// to the config
@@ -318,7 +392,7 @@ targetFilesName.map( ( event ) => {
 		);
 
 
-		targetFilesName.map( ( event ) => {
+		targetTempFilesName.map( ( event ) => {
 
 			compiler.apply(
 
@@ -331,25 +405,9 @@ targetFilesName.map( ( event ) => {
 					}
 				}),
 
-				new ReplaceInFileWebpackPlugin([
-					{
-						dir: globs.examples,
-						files: [ event[1], event[1] ],
-						rules: [
-							{ search: '@@{website_title}', replace: customWebsiteTitle },
-							{ search: '@@{website_desc}', replace: customWebsiteDesc },
-							{ search: '@@{website_canonical}', replace: customWebsiteCanonical },
-							{ search: '@@{website_author}', replace: customWebsiteAuthor },
-							{ search: '@@{website_generator}', replace: customWebsiteGenerator },
-							{ search: '@@{website_version}', replace: customWebsiteVersion },
-							{ search: '@@{website_comment}', replace: customWebsiteComment },
-							{ search: '@@{website_hash}', replace: customWebsiteHash },
-
-						]
-					}
-				])
-
-
+				new ReplacePlaceholderForFile({
+					filepath: `./${globs.examples}/${event[1]}`
+				})
 
 			);
 
@@ -383,11 +441,11 @@ const server = new WebpackDevServer( compiler, {
 
 server.listen( globs.port, "localhost", function (err, result) {
 	if (err) {
-	    return console.log(err);
+	    return console.log(colors.fg.Red, err, colors.Reset);
 	}
 
 
-	console.log('Listening at http://localhost:8080/');
+	console.log(colors.fg.Yellow, 'Listening at http://localhost:8080/', colors.Reset);
 })
 
 
@@ -396,10 +454,10 @@ server.listen( globs.port, "localhost", function (err, result) {
  *  Build a table of contents (TOC)
  *************************************
  */
-compiler.plugin( 'done', () => { 
+compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 	
 	setTimeout ( () => {
-		['./'+globs.dist+'/bundle.css', './'+globs.dist+'/bundle.js'].map( ( filepath ) => {
+		['./'+globs.dist+'/css/bundle.css', './'+globs.dist+'/js/bundle.js'].map( ( filepath ) => {
 
 			if ( fs.existsSync( filepath ) ) {
 
@@ -433,8 +491,14 @@ compiler.plugin( 'done', () => {
 						var result = curCon.replace(/\$\{\{TOC\}\}/g, curToc );
 
 						fs.writeFile( filepath, result, 'utf8', function (err) {
-							console.log( filepath + ' \'s table of contents generated successfully!' );
-							if (err) return console.log(err);
+							
+							if ( err ) {
+								console.log(colors.fg.Red, err, colors.Reset);
+								return;
+							}
+							//file written successfully	
+							console.log(colors.bg.Green, colors.fg.White, `${filepath}'s table of contents generated successfully!`, colors.Reset);
+
 						});
 
 

@@ -3,12 +3,12 @@
  * ## Project Name        :  Uix Webpack Scaffold
  * ## Project Description :  Simple demo for scaffold of webpack 4 + react + babel. Supports batch processing of HTML templates, SASS, and JavaScript module files.
  * ## Based on            :  Uix Webpack Scaffold
- * ## Version             :  1.0.2
- * ## Last Update         :  December 23, 2018
+ * ## Version             :  1.0.3
+ * ## Last Update         :  May 23, 2019
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
  * ## Compatible With     :  Bootstrap 4.x, React
  * ## Released under the MIT license.
  * 	
- */body{font:100% Helvetica,sans-serif;background:#eee;line-height:1.7666666}#root:before{background:#529606}#root:after,#root:before{font-size:1.2rem;display:block}#root:after{background:red;content:"#root::after"}#root:before{content:"#root::before"}
+ */body{direction:rtl}
