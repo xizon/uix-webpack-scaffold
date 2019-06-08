@@ -61,7 +61,8 @@
     "webpack-cli": "^3.1.2",
     "webpack-concat-plugin": "^3.0.0",
     "webpack-dev-middleware": "^3.4.0",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.1.14",
+    "querystringify": "^2.1.1"
   },
   "dependencies": {},
   "prettier": {
