@@ -12,6 +12,8 @@ node_js:
   
 before_install:
   - npm i
+  - npm config set package-lock false
+  
 cache:
   - directories:
       - node_modules
