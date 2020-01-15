@@ -1,11 +1,9 @@
 language: node_js
 
 node_js:
-  - 10
+  - 10.14.1
 
 script: 
- - sudo npm cache clear --force
- - sudo npm i -g npm
- - npm install --dev
+ - npm install
  - npm view build
  
