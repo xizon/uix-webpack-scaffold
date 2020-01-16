@@ -4,7 +4,7 @@
  * ## Project Description :  Simple demo for scaffold of webpack 4 + react + babel. Supports batch processing of HTML templates, SASS, and JavaScript module files.
  * ## Based on            :  Uix Webpack Scaffold
  * ## Version             :  1.0.35
- * ## Last Update         :  January 15, 2020
+ * ## Last Update         :  January 16, 2020
  * ## Powered by          :  UIUX Lab
  * ## Created by          :  UIUX Lab (https://uiux.cc)
  * ## Contact Us          :  uiuxlab@gmail.com
@@ -12,14 +12,77 @@
  * ## Released under the MIT license.
  * 	
  */
+/**
 
-body{font:100% Helvetica,sans-serif;background:#eee;line-height:1.7666666}
+	TABLE OF CONTENTS
+	---------------------------
+	
+	
+	1.Base
+    2.APP1
+    3.APP2
+    4.APP3
 
-#root::before{background:#529606;font-size:1.2rem;display:block}#root::after{background:#f00;font-size:1.2rem;display:block}
 
-#root::after{content:'#root::after'}
+*/
 
-#root::before{content:'#root::before'}
+/* 
+ *************************************
+ * <!-- Base -->
+ *************************************
+ */
+body {
+  font: 100% Helvetica, sans-serif;
+  background: #eee;
+  line-height: 1.7666666;
+}
+
+/* 
+ *************************************
+ * <!-- APP1 -->
+ *************************************
+ */
+#root {
+  /* this is a description. */
+}
+
+#root::before {
+  background: #529606;
+  font-size: 1.2rem;
+  display: block;
+}
+
+#root::after {
+  background: #f00;
+  font-size: 1.2rem;
+  display: block;
+}
+
+/* 
+ *************************************
+ * <!-- APP2 -->
+ *************************************
+ */
+#root {
+  /* this is a description. */
+}
+
+#root::after {
+  content: '#root::after';
+}
+
+/* 
+ *************************************
+ * <!-- APP3 -->
+ *************************************
+ */
+#root {
+  /* this is a description. */
+}
+
+#root::before {
+  content: '#root::before';
+}
 
 
 /*# sourceMappingURL=bundle.css.map*/

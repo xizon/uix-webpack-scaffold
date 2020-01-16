@@ -249,15 +249,26 @@ const webpackConfig = {
 
 					// fallback to style-loader in development
 					{
-						loader: MiniCssExtractPlugin.loader,
+						loader: MiniCssExtractPlugin.loader, //Extracts CSS into separate files  ( Step 3 )
 						options: {
 							// you can specify a publicPath here
 							// by default it use publicPath in webpackOptions.output
 							publicPath: path.resolve(__dirname, './' + globs.dist )
+                            
 						}
 					},
-					'css-loader',
-					'sass-loader',
+                    
+                    {
+                        loader: "css-loader" // translates CSS into CommonJS ( Step 2 )
+                    },
+                    {
+                        loader: 'sass-loader', // compiles Sass to CSS ( Step 1 )
+                        options: {
+                            /* (nested | expanded | compact | compressed) */
+                            outputStyle: 'expanded',
+                        }
+                       
+                    },
 
 					
 				]
@@ -476,7 +487,7 @@ server.listen( globs.port, "localhost", function (err, result) {
 compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 	
 	setTimeout ( () => {
-		['./'+globs.dist+'/css/bundle.css', './'+globs.dist+'/js/bundle.js'].map( ( filepath ) => {
+		['./'+globs.dist+'/css/bundle.css', './'+globs.dist+'/css/bundle-rtl.css', './'+globs.dist+'/js/bundle.js'].map( ( filepath ) => {
 
 			if ( fs.existsSync( filepath ) ) {
 
@@ -489,7 +500,7 @@ compiler.hooks.done.tap( 'MyPlugin', ( compilation ) => {
 
 
 					//is the matched group if found
-					if ( newtext && newtext.length > 1 ) {  
+					if ( newtext && newtext.length > 0 ) {  
 
 						let curToc = '';
 
